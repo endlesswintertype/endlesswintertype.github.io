@@ -1,0 +1,196 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>title</title>
+<script src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+<style>
+body {
+	background-color:aliceblue;
+}
+table{
+border-top:1px solid #333;
+border-left:1px solid #333;
+border-spacing:0;
+background-color:#fff;
+width:100%;
+	position:absolute;
+	
+	left:0;
+	right:0;
+}
+table td{
+border-bottom:1px solid #333;
+border-right:1px solid #333;
+font-size:13px;
+padding:5px;
+}
+.font0{color:rgb(0, 0, 0);}
+.wrapDiv {
+	width:100%;
+	max-width:1600px;
+	margin:0 auto;
+	text-align:center;
+	position:absolute;
+	top:80px;
+	left:0;
+	right:0;
+}
+.Box {
+	float:center;
+	width:1500px;
+	height:240px;
+	/*background-color:aqua;
+	*/
+    	margin:0 auto;
+	margin-top:0px;
+	clear:both;
+}
+
+#btn {
+	float:center;
+	width:100px;
+	height:30px;
+	margin-left:10px;
+	margin-top:150px;
+}
+
+.selectedName {
+	float:center;
+	width:340px;
+	background:#666;
+	margin-top:10px;
+	margin-left:30px;
+	background:#ffffff;
+	overflow:hidden;
+}
+h1 {
+	text-align:center;
+}
+</style>
+</head>
+<body>
+<h1>随机选择</h1>
+<span id="span"></span>
+
+<div class="wrapDiv">
+    
+	
+    <div id="selectedName" class="selectedName"></div>
+    <table style="width:288.02pt" align="center"> 
+ <colgroup>
+  <col width="80" style="width:48.00pt;" span="6"> 
+ </colgroup>
+ <tbody>
+  <tr height="24"> 
+   <td class>甚尔</td> 
+   <td class>七海</td> 
+   <td class>灰原</td> 
+   <td class>夏油</td> 
+   <td class="font0">硝子</td> 
+   <td class>夜蛾</td> 
+  </tr> 
+  <tr height="24"> 
+   <td class>乙骨</td> 
+   <td class>狗卷</td> 
+   <td class>熊猫</td> 
+   <td class>真希</td> 
+   <td class>真依</td> 
+   <td class>三轮</td> 
+  </tr> 
+  <tr height="24"> 
+   <td class="font0">虎杖</td> 
+   <td class>伏黑</td> 
+   <td class>蔷薇</td> 
+   <td class="font0">漏壶</td> 
+   <td class="font0">真人</td> 
+   <td class>东堂</td> 
+  </tr> 
+  <tr height="24"> 
+   <td class="font0">宿傩</td> 
+   <td class>里梅</td> 
+   <td class>里香</td> 
+   <td class>羂索</td> 
+   <td class>九十九</td> 
+   <td class>歌姬</td> 
+  </tr> 
+ </tbody>
+</table>
+    
+    <input type="button" id="btn" value="开始">
+        <h1>选择结果</h1>	 
+		<label id="choose">空</label>
+
+
+</div>
+
+<script>
+ // 模拟后台数据
+ var arr = ["甚尔", "七海", "灰原", "夏油", "硝子", "夜蛾", "乙骨", "狗卷", "熊猫", "真希",
+     "真依", "三轮", "13", "虎杖", "伏黑", "蔷薇", "漏壶", "真人", "东堂", "宿傩", "里梅",
+     "里香", "羂索", "九十九", "歌姬", 
+ ];					
+
+ var orgArrCount = arr.length;
+ var currentSelectNum = 0;
+
+
+ function appendSelectedName() {
+
+	var label = document.getElementById("choose");
+     label.innerHTML = arr[currentSelectNum];
+ }
+
+ $('#btn').click(function() {
+     var curentCount = arr.length;
+
+     // 监视按钮的状态
+     if (this.value === "开始") {
+         // 定时针
+         timeId = setInterval(function() {
+
+             //随机生成一个数
+             var num = Math.floor(Math.random() * curentCount);
+             currentSelectNum = num;
+
+             // 显示选中
+             appendSelectedName();
+         }, 10);
+		 
+     this.value = "停止";
+     } else {
+         // 清除计时器
+         clearInterval(timeId);
+
+         // 显示选中
+         appendSelectedName();
+
+         
+         this.value = "开始";
+     }
+ });
+
+ // 获取时间的函数
+ getTime();
+ setInterval(getTime, 10)
+
+ function getTime() {
+     var day = new Date();
+     var year = day.getFullYear(); //年
+     var month = day.getMonth() + 1; //月
+     var dat = day.getDate(); //日
+     var hour = day.getHours(); //小时
+     var minitue = day.getMinutes(); //分钟
+     var second = day.getSeconds(); //秒
+     month = month < 10 ? "0" + month : month;
+     dat = dat < 10 ? "0" + dat : dat;
+     hour = hour < 10 ? "0" + hour : hour;
+     minitue = minitue < 10 ? "0" + minitue : minitue;
+     second = second < 10 ? "0" + second : second;
+     $("#span").innerText = year + "-" + month + "-" + dat + " " + hour + ":" + minitue + ":" + second
+ }
+</script>
+
+</body>
+</html>
+
